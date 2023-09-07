@@ -1,0 +1,21 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    long long a{}, b{}, result{};
+   input >> a >> b;
+   result = a%b;
+
+   if (result < 0)
+   {
+      result += abs(b);
+   }
+   output << result;
+
+   return 0;
+}

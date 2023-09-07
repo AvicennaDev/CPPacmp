@@ -1,0 +1,53 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+  ifstream input ("input.txt");
+  ofstream output("output.txt");
+
+  // создание динамического массива
+  // array это адрес на 1 ячейку массива, new  предполагает. что по
+  // 1му адресу будет находится массив инт чисел
+  // с длиной bushes
+  int bushes{};
+  input >> bushes;
+
+  int sum{};
+  int* berries = new int [bushes];
+  //int berries[10]{};
+
+  // чтение данных с файла в массив
+  for (int i{}; i < bushes; i++)
+  {
+      input >> berries[i];
+  }
+
+  int n{}, maxBerries{}; // номер выгодной позиции для сбора максимума
+  // в максимум запишем урожай стоя у 1 куста
+  maxBerries = berries[bushes-1] + berries[0] + berries[1];
+  n = 1;
+  // перебор кустов от 1 до предпоследнего
+  int i=1;
+  for ( ;i < bushes-1 ;i++ )
+   {
+      sum = berries[i-1] + berries[i] + berries[i+1];
+      if ( sum > maxBerries)
+      {
+          maxBerries = sum;
+          n = i +1; // сохраняем номер лучшего места
+      }
+   }
+  // проверка положения на последем кусте
+  sum = berries[bushes-2] + berries[bushes-1] + berries[0];
+  if ( sum > maxBerries)
+  {
+      maxBerries = sum;
+      n=bushes-1;
+  }
+  output << maxBerries << " " << n;
+  delete [] berries;
+  return 0;
+
+}

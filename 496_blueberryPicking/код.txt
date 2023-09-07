@@ -1,0 +1,69 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+  ifstream input ("input.txt");
+  ofstream output("output.txt");
+
+  // создание динамического массива
+  // array это адрес на 1 €чейку массива, new  предполагает. что по
+  // 1му адресу будет находитс€ массив инт чисел
+  // с длиной bushes
+  int bushes{};
+  input >> bushes;
+
+  int sum{};
+  int* berries = new int [bushes];
+  for ( int i{}; i < bushes; i++ )
+  {
+      input >> berries [i];
+      if (bushes == 3)
+      {
+          sum += berries [i];
+      }
+  }
+  //  если  сумма больше 0, то вывести еЄ значение и закночить
+  if (sum)
+  {
+      output << sum;
+      return 0;
+  }
+
+  int maxSum{};
+  // поиск макс суммы
+  for ( int i{}; i < bushes ; i++ ) //i < bushes
+  {
+      for ( int j{i}; j <= i+2; j++)
+     {
+         sum +=berries[j];
+         // дл€ случа€ выхода за пределы массива на 1 элемент
+          if (j == bushes-1 && i+1 == bushes )
+         {
+             sum +=berries[0];
+             sum +=berries[1];
+             break;
+         }
+          // на случай выхода за пределы массива на 2 элемента
+        else if (j+1 == bushes && i+2 == bushes )
+         {
+             sum +=berries[0];
+             break;
+         }
+
+     }
+      // полученную сумму срвнивает и возможно записыват в максимум
+      if (maxSum < sum)
+      {
+          maxSum = sum;
+            }
+      sum = 0;
+  }
+
+  output << maxSum;
+  // очистка пам€ти
+  delete [] berries;
+  return 0;
+
+}

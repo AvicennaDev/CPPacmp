@@ -1,0 +1,75 @@
+//295-encryption
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    string word{}, encryption{}, memory{};
+    bool wordB = true;
+    int k{};
+
+    getline(input, encryption);
+    memory = encryption;
+    getline(input, word);
+
+
+    while (wordB)
+    {
+
+        // поиск совпадений в текущей строке
+        for (int i{}; i < encryption.size() ; i++)
+        {
+           // поиск первой совпадающей буквы
+          if (encryption[i] == word[k])
+          {
+           // проверка букв после совпадений
+              for ( int j{i}; j < encryption.size() ;j++, k++ )
+              {
+                 if(encryption[j] != word[k])
+                 {
+                     break;
+                 }
+                 // если дошли до последнего символа
+                 if(j == (encryption.size()-1))
+                 {
+                     j = 0;
+                 }
+                 // если конец сравниваемого слова
+                 if ((word.size()-1) == k)
+                 {
+                     output << encryption;
+                     return 0;
+                 }
+              }
+              k = 0;
+           }
+        }
+
+        // перезаписать строку со сдвигом в единицу
+        for ( int i{}; i < encryption.size(); i++ )
+        {
+            // если число = 90 те символ z
+            if (encryption[i] == 'Z')
+            {
+                encryption[i] = 'A';
+                continue;
+            }
+            encryption[i]++;
+        }
+        // счетчик для второго слова
+        //k++;
+        // если строка сдвинулась до прежнего значения
+        if (encryption == memory)
+        {
+            output << "IMPOSSIBLE";
+            return 0;
+        }
+    }
+
+    return 0;
+}

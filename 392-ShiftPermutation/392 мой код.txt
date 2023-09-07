@@ -1,0 +1,44 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream  output ("output.txt");
+    int allNumber{}, minNumber{1000000}, point{};
+
+    input >> allNumber;
+    int* SerialNumber = new int [allNumber];
+
+    for ( int i{}; i < allNumber; i++)
+    {
+        input >> SerialNumber [i];
+        if (minNumber > SerialNumber[i])
+        {
+            minNumber = SerialNumber[i];
+            point = i;
+        }
+    }
+
+    for ( int i = point; i < allNumber;i++ )
+    {
+        output << SerialNumber[i] << " " ;
+    }
+    for (int i {}; i < point; i++)
+    {
+       output << SerialNumber[i] << " ";
+    }
+
+    return 0;
+}
+
+
+ 
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+//1141-equalElements
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    int number1{}, number2{}, index1{1}, index2{1};
+    // index1 считает пары, поэтому нужно на 1 больше изначально
+    input >> number1;
+    do
+    {
+        number2 = number1;
+        input >> number1;
+        // если пара элементов равна, то увеличить index1 на единицу
+        if ( number1 == number2)
+        {
+            index1++;
+        }
+        // если прошли одинаковые числа, то сравнить index двух  прошедших
+        // последовательностей 
+        else if ( number1 != number2 && index2 < index1)
+        {
+            // пересохранить информацию о прошедшей последовательности 
+            // если там одинаковых чисел больше
+            index2 = index1;
+            index1 = 1;
+        }
+    } while (number1 != 0);
+    // тк информация о больших последовательностях 
+    //хранится в index2 то вывести его
+    output << index2;
+
+    return 0;
+}

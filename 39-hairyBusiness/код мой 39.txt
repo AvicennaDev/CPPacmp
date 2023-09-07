@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+   ifstream input ("input.txt");
+   ofstream output ("output.txt");
+   int countPrice{}, sold{}, maxPrice{}, index{}, index2{};
+   input >> countPrice;
+   int* price = new int [countPrice];
+   for ( int i{}; i < countPrice; i++ )
+   {
+     input >> price[i];
+     if(maxPrice < price[i])
+     {
+         maxPrice = price[i];
+         index = i;
+     }
+   }
+   // рост волоса до первой стрижки равен инденкс+1
+   // индекс увеличен для начала не с прошлого максимума
+   sold +=maxPrice*(++index);
+   // обнуление максимума, для поиска нового
+   maxPrice = 0;
+
+   // это должно быть переписано через while
+   for ( ; index < countPrice; )
+   {
+
+       for(int j{index}; j <  countPrice; j++ )
+       {
+           if(maxPrice < price[j])
+           {
+               maxPrice = price[j];
+               index2 = j;
+           }
+
+       }
+       // из текущего индекса вычитается бывший до этого индекс максимума
+       sold += maxPrice * (index2-(index-1));
+       index = index2+1;
+       // необходимо обнуление максимума на случай если
+       // максимумом всех чисел было прошлое число
+       maxPrice=0;
+   }
+   output << sold;
+   return 0;
+}

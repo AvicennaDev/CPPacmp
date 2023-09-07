@@ -1,0 +1,15 @@
+// 1147 upperRegister
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    char letter {'\0'};
+    input >> letter;
+    output << char (toupper(letter));
+
+    return 0;
+}

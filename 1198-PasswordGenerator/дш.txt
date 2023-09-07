@@ -1,0 +1,6 @@
+
+ input >>n;
+ input >>a >>b >>c;
+ for (i=0; i<a; i++)  {output <<char(i%2+65);}   // выводим заглавные, череду€ A и B
+ for (i=0; i<b; i++)  {output <<char(i%2+97);}   // выводим строчные a и b
+ for (i=0; i<n-a-b; i++)  {output <<char(i%2+48);}   // выводим цифры 0 и 1 до самого конца

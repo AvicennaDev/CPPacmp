@@ -1,0 +1,41 @@
+int main()
+{
+   ifstream input ("input.txt");
+   ofstream output ("output.txt");
+   int number{}, sum{}, number2{};
+   bool zero = true;
+   do
+   {
+     input >> number;
+     sum +=number;
+     if (number == 0 && number2 == 0)
+     {
+        zero = false;
+     }
+     number2 = number;
+   } while (zero);
+   output << sum;
+
+}
+
+
+___________________
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    int number{}, sum{}, number2{};
+    // важно считать число один раз, для аботы с 2 числами
+    input >> number;
+    do
+    {
+      sum +=number;
+      number2 = number;
+      input >> number;
+      // вместо if с суммированием 0, можно вывести их сумму в вайил
+    } while (number + number2);
+    output << sum;
+
+    return 0;
+}

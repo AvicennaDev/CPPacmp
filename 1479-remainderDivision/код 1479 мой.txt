@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    long long a{}, b{}, quotient{}, remainder{};
+   input >> a >> b;
+   quotient = a/b;
+
+   if(a < 0 && b >0 && (a != b*quotient))
+   {
+       quotient += -1;
+   }
+   else if(b < 0 && a < 0 && (a != b*quotient))
+   {
+       quotient++;
+   }
+   remainder =a - quotient*b;
+   output << remainder;
+
+   return 0;
+}

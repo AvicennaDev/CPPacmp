@@ -1,0 +1,54 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+
+    int days{};
+    input >> days;
+
+    int* dayMark= new int [days];
+    for( int i{}; i < days; i++ )
+    {
+        input >> dayMark[i];
+    }
+
+    // вывод нечетных дней, в odd считаем их количество
+    int odd{};
+    for( int i{}; i < days; i++ )
+    {
+        if ( dayMark[i]%2 > 0)
+        {
+            output << dayMark[i] << " ";
+            odd++;
+        }
+    }
+    output << endl;
+    // вывод четных дней, в even считаем их количество
+    int even{};
+    for( int i{}; i < days; i++ )
+    {
+        if ( dayMark[i]%2 == 0)
+        {
+            output << dayMark[i] << " ";
+            even++;
+        }
+    }
+    output << endl;
+
+    // плохо указано условие, 4 нужно вывести если 3 и 4 одинаково
+    if(even >= odd)
+    {
+        output << "YES";
+    }
+    else
+    {
+        output << "NO";
+    }
+
+    return 0;
+}

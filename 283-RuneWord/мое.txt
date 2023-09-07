@@ -1,0 +1,56 @@
+//283-RuneWord
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+    string rune{};
+    int lowercase{};
+
+    getline(input, rune);
+    // когда первый символ строки  != верхнему регистру
+    // или длина меньше 2 символов
+    if (rune[0] < 'A' || rune[0] > 'Z' || rune.size() < 2)
+    {
+        output << "No";
+        return 0;
+    }
+
+    for ( int i = 1; i < rune.size(); i++ )
+    {
+        // учет считанной заглавной буквы  и она пока первая
+        if (rune[i] >= 'A' && rune[i] <= 'Z')
+        {
+            if (lowercase == 0)
+            {
+                output << "No";
+                return 0;
+            }
+            lowercase = 0;
+        }
+        else        // иначе счет строчной буквы буквы
+        {
+            lowercase++;
+            if (lowercase > 3)
+            {
+                output << "No";
+                return 0;
+            }
+        }
+    }
+    // если в конце строки одна заглавная
+    if (lowercase == 0)
+    {
+        output << "No";
+        return 0;
+    }
+    output << "Yes";
+
+
+    return 0;
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+
+    int countNumber{}, mainNumber{};
+
+    input >> countNumber;
+    int* numbers = new int [countNumber];
+
+    for (int i{};i< countNumber; i++ )
+    {
+      input >> numbers[i];
+    }
+    input >> mainNumber;
+
+    int closestDiff = 1100;
+    int closestNumber = 0;
+    // нахождение модуля
+    for (int i{}; i < countNumber; i++ )
+    {
+       int modul = numbers[i]-mainNumber;
+
+       bool isModulNegative = false;
+       if (modul < 0)
+       {
+           modul = -modul;
+           isModulNegative = true;
+       }
+       if ((modul == closestDiff && isModulNegative) ||
+            modul < closestDiff)
+       {
+           closestDiff = modul;
+           closestNumber = numbers[i];
+       }
+    }
+    output << closestNumber;
+    delete [] numbers;
+    return 0;
+}
+

@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+    ifstream input ("input.txt");
+    ofstream output ("output.txt");
+
+    int countNumber{}, mainNumber{};
+
+    input >> countNumber;
+    int* numbers = new int [countNumber];
+
+    for (int i{};i< countNumber; i++ )
+    {
+      input >> numbers[i];
+    }
+    input >> mainNumber;
+
+    int  min1{1100}, min2{1100}, elementHigher{}, elementBelow{};
+    // нахождение модуля
+    for (int i{}; i < countNumber; i++ )
+    {
+       int modul = numbers[i]-mainNumber;
+       if (modul == 0)
+       {
+           output << numbers[i];
+           return 0;
+       }
+       if (modul > 0)
+       {
+           if ( modul < min1)
+           {
+               min1 = modul;
+               elementHigher = numbers[i];
+           }
+       }
+       else if (modul < 0)
+       {
+           if (-modul < min2)
+           {
+               min2 = -modul;
+               elementBelow = numbers[i];
+           }
+       }
+    }
+
+    if (min2 > min1)
+    {
+        output << elementHigher;
+    }
+    else if (min2 <= min1 )
+    {
+        output << elementBelow;
+    }
+    delete [] numbers;
+    return 0;
+}
+
